@@ -15,7 +15,6 @@ import java.sql.Timestamp;
 @Data
 @Getter
 @Setter
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class City  {
 
     @Id
@@ -38,6 +37,8 @@ public class City  {
     public String text;
     @JsonProperty
     private String title;
+    @JsonProperty
+    private String temperature;
 
     private Timestamp timeLastQuery;
 

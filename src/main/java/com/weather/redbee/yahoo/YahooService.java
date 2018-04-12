@@ -10,7 +10,8 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class YahooService {
 
-    private String URL_API_YAHOO = "http://query.yahooapis.com/v1/public/yql?u=f&format=json&q=select item from weather.forecast where woeid in ";
+    private String URL_API_YAHOO = "http://query.yahooapis.com/v1/public/yql?" +
+            "format=json&q=select units, item from weather.forecast where u=\"c\" and  woeid in ";
 
     private String QUERY_API_YAHOO = "(select woeid from geo.places(1) where text=\"(";
 
@@ -34,6 +35,7 @@ public class YahooService {
             city.setDescription(utilities.getImgUrl(responseCity.getQuery().getResults().getChannel().getItem().getDescription()));
             city.setTemp(responseCity.getQuery().getResults().getChannel().getItem().getCondition().getTemp());
             city.setText(responseCity.getQuery().getResults().getChannel().getItem().getCondition().getText());
+            city.setTemperature(responseCity.getQuery().getResults().getChannel().getUnits().getTemperature());
         }catch (HttpClientErrorException e){
             System.out.println("Query: " + query.toString());
             System.out.println(e);

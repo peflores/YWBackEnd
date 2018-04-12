@@ -9,7 +9,6 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import java.util.function.Consumer;
 
 @Component
 public class InitApplicationRunner implements ApplicationRunner {
@@ -22,12 +21,9 @@ public class InitApplicationRunner implements ApplicationRunner {
     private YahooService yahooService;
 
     public void run(ApplicationArguments args) throws Exception {
-        cityService.findAll().forEach(new Consumer<City>() {
-            @Override
-            public void accept(City city) {
-                City currentCity = yahooService.getDataFromYahooService(city);
-                cityService.update(currentCity);
-            }
+        cityService.findAll().forEach(city -> {
+            City currentCity = yahooService.getDataFromYahooService(city);
+            cityService.update(currentCity);
         });
 
     }
@@ -35,13 +31,10 @@ public class InitApplicationRunner implements ApplicationRunner {
     public void polling() {
         System.out.println("##polling##");
         cityService.findByTimeLastQuery(utilities.getBeforesHourDateTime())
-                .forEach(new Consumer<City>() {
-                            @Override
-                            public void accept(City city) {
-                                City currentCity = yahooService.getDataFromYahooService(city);
-                                cityService.update(currentCity);
-                            }
-                        }
+                .forEach(city -> {
+                    City currentCity = yahooService.getDataFromYahooService(city);
+                    cityService.update(currentCity);
+                }
                 );
     }
 

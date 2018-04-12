@@ -10,12 +10,17 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "item"
+        "item",
+        "units"
 })
 public class Channel {
 
     @JsonProperty("item")
     private Item item;
+
+    @JsonProperty("units")
+    private Units units;
+
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -28,6 +33,12 @@ public class Channel {
     public void setItem(Item item) {
         this.item = item;
     }
+
+    @JsonProperty("units")
+    public void setUnits(Units units) { this.units = units; }
+
+    @JsonProperty("units")
+    public Units getUnits() { return units; }
 
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
