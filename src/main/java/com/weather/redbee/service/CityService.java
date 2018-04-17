@@ -1,31 +1,17 @@
 package com.weather.redbee.service;
 
-import com.weather.redbee.dao.CityDao;
-import com.weather.redbee.entity.City;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import com.weather.redbee.dot.CityDTO;
 
 import java.sql.Timestamp;
+import java.util.List;
+import java.util.Optional;
 
+public interface CityService extends GenericService<CityDTO> {
 
-@Component
-public class CityService {
+    List<CityDTO> findByTimeLastQuery(Timestamp lastQuery);
 
-    @Autowired
-    private CityDao cityDao;
+    Optional<CityDTO> findByLatAndLong(String lat, String lon);
 
-    public City addCity(City city) {
-        return cityDao.save(city);
-    }
-
-    public Iterable<City> findAll() {
-        return cityDao.findAll();
-    }
-
-    public Iterable<City> findByTimeLastQuery(Timestamp lastQuery) {
-        return cityDao.findByTimeLastQuery(lastQuery);
-    }
-
-    public City update(City city) { return cityDao.save(city); }
+    List<CityDTO> findByBoardId(String idBoard);
 
 }

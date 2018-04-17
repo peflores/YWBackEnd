@@ -1,5 +1,6 @@
 package com.weather.redbee.yahoo;
 
+import com.weather.redbee.dot.CityDTO;
 import com.weather.redbee.entity.City;
 import com.weather.redbee.utilities.Utilities;
 import com.weather.redbee.yahoo.entity.YahooQuery;
@@ -23,7 +24,7 @@ public class YahooService {
     public YahooService() {
         query = new StringBuilder();
     }
-    public City getDataFromYahooService(City city) {
+    public CityDTO getDataFromYahooService(CityDTO city) {
 
         query.append(URL_API_YAHOO).append(QUERY_API_YAHOO)
                 .append(city.getLat()).append(",")
@@ -35,7 +36,7 @@ public class YahooService {
             city.setDescription(utilities.getImgUrl(responseCity.getQuery().getResults().getChannel().getItem().getDescription()));
             city.setTemp(responseCity.getQuery().getResults().getChannel().getItem().getCondition().getTemp());
             city.setText(responseCity.getQuery().getResults().getChannel().getItem().getCondition().getText());
-            city.setTemperature(responseCity.getQuery().getResults().getChannel().getUnits().getTemperature());
+            city.setUnit(responseCity.getQuery().getResults().getChannel().getUnits().getTemperature());
         }catch (HttpClientErrorException e){
             System.out.println("Query: " + query.toString());
             System.out.println(e);

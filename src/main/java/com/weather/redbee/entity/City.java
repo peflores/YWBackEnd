@@ -1,45 +1,40 @@
 package com.weather.redbee.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.io.Serializable;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
-@Entity
+@Entity(name="CITY")
 @Data
 @Getter
 @Setter
-public class City  {
+@Table(name="CITY")
+public class City {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @JsonProperty
-    private String cityId;
-    @JsonProperty
+    @Column(name = "CITY_ID")
+    private Long cityId;
+    @Column(name = "DATE")
     private String date;
-    @JsonProperty
+    @Column(name = "DESCRIPTION")
     private String description;
-    @JsonProperty
-    private String idUser;
-    @JsonProperty
+    @Column(name = "LAT")
     private String lat;
-    @JsonProperty
+    @Column(name = "LON")
     private String lon;
-    @JsonProperty
+    @Column(name = "TEMP")
     private String temp;
-    @JsonProperty
+    @Column(name = "TEXT")
     public String text;
-    @JsonProperty
+    @Column(name = "TITLE")
     private String title;
-    @JsonProperty
-    private String temperature;
-
+    @Column(name = "UNIT")
+    private String unit;
+    @Column(name = "TIME_LAST_QUERY")
     private Timestamp timeLastQuery;
 
 }

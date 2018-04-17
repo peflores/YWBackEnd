@@ -1,25 +1,24 @@
 package com.weather.redbee.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
+@Entity(name="BOARD")
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
-public class Board implements Serializable {
+@Table(name="BOARD")
+public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "BOARD_ID")
     private Long boardId;
-
-    private Long cityId;
-
+    @Column(name = "USER_ID")
     private Long userId;
+    @Column(name = "BOARD_NAME")
+    private String boardName;
 }
